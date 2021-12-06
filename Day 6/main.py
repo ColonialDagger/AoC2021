@@ -1,9 +1,16 @@
-import numpy as np
 import collections
+import numpy as np
 
 
 def fastTick(fish, days):
-    """Calculates the number of fish"""
+    """Calculates the number of fish using a counter. This algorithm takes about 0.75 ms per day.
+
+    Args:
+        fish -- the initial dataset in list format
+        days -- the number of days to tick
+
+    Returns:
+        Counter: count of fish with varying birth ticks"""
     count = collections.Counter({
         -1: 0,
         0: 0,
@@ -54,10 +61,9 @@ if __name__ == '__main__':
     print('Counting lanternfish...')
     file = 'testinput.txt' if testing else 'input.txt'
     with open(file) as f:
-        input = np.array(list(map(int, f.read().split(','))))
+        input = list(map(int, f.read().split(',')))
 
     # This is a counter method of calculating fish count.
     days = 256
-    print(f'''Initial State: {','.join(list(map(str, fish.tolist())))}''')
+    print(f'''Initial State: {','.join(list(map(str, input)))}''')
     print(f'\nThere are {sum(fastTick(input, days).values())} lanternfish surrounding the submarine. Recommend deploying fish repellent.')
-
