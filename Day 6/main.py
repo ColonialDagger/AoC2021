@@ -1,8 +1,9 @@
 import collections
+import typing
 import numpy as np
 
 
-def fastTick(fish, days):
+def fastTick(fish: list, days: int) -> typing.Counter:
     """Calculates the number of fish using a counter. This algorithm takes about 0.75 ms per day.
 
     Args:
@@ -10,7 +11,8 @@ def fastTick(fish, days):
         days -- the number of days to tick
 
     Returns:
-        Counter: count of fish with varying birth ticks"""
+        Counter: count of fish with varying birth ticks
+    """
     count = collections.Counter({
         -1: 0,
         0: 0,
@@ -42,7 +44,7 @@ def fastTick(fish, days):
     return count
 
 
-def tickDay(fish):
+def tickDay(fish: np.ndarray) -> np.ndarray:
     """This is the original tick method that was used. While functional, this method is extremely slow."""
     fish -= 1  # Ticks day
 
@@ -50,8 +52,7 @@ def tickDay(fish):
     for i in range((fish == -1).sum()):
         fish = np.append(fish, 8)
 
-    fish = np.where(fish == -1, 6, fish)  # Resets fish counters upon expiring
-    return fish
+    return np.where(fish == -1, 6, fish)  # Resets fish counters upon expiring
 
 
 if __name__ == '__main__':
