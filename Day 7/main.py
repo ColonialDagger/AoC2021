@@ -66,7 +66,6 @@ def statistical_method(data: list, part1: bool) -> int:
 
 if __name__ == '__main__':
     testing = True
-    part1 = False
 
     # Reads lines into a list input
     print('Determining crab positions...')
@@ -74,10 +73,6 @@ if __name__ == '__main__':
     with open(file) as f:
         data = list(map(int, f.read().split(',')))
 
-    # target, fuel_required = bruteforce(data, part1)
-
-    median_result = statistical_method(data, part1)
-
-    print(f"{statistical_method(data, part1)} units of fuel are needed to align crabs.")
-    print(f"After further analysis of factorial movement requirements, {statistical_method(data, part1)}"
+    print(f"{statistical_method(data, True)} units of fuel are needed to align crabs.")
+    print(f"After further analysis of factorial movement requirements, {statistical_method(data, False)}"
           f" units of fuel are needed to align crabs.")
