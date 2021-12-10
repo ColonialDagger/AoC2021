@@ -15,20 +15,30 @@ def find_lows(data):
             neighbor[3] = col < data[y][x+1] if x < len(row)-1 else None  # Evaluates right
 
             if all(list(filter(lambda i: i != None, neighbor))):
-                lows.append(col)
+                lows.append([y, x, col])
 
     for n in lows:
-        risk += n + 1
+        risk += n[2] + 1
 
     return lows, risk
 
 
-def find_basins(data):
-    basins = []
+def find_basins(data, lows):
+
+    # Find edges
+    edges = np.zeros((data.__len__(), data[0].__len__()), dtype=int)
+    for y, row in enumerate(data):
+        for x, col in enumerate(row):
+            edges[y][x] = col if col != 9 else -1
+
+    # Find basins
+    for row, col, low in lows:
+        print()
+    print()
 
 
 if __name__ == '__main__':
-    testing = False
+    testing = True
 
     # Reads lines into a list input
     print('Reading heightmap data...')
@@ -49,6 +59,7 @@ if __name__ == '__main__':
     lows, risk = find_lows(data)
 
     print(f'There are {lows.__len__()} low points in the cave system, with a total risk level of {risk}.')
+    print(f'Smoke will fill approximately {find_basins(data, lows)} basins.')
 
 
 
